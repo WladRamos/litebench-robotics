@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+dist/
+build/
+
+# Dados e artefatos pesados (vão para o Hugging Face Hub, não para o git)
+outputs/
+runs/
+datasets/
+checkpoints/
+*.mp4
+*.parquet
+wandb/
+
+# Assets de terceiros baixados localmente (ver assets/README.md)
+assets/third_party/
+assets/workshop_extract.json
+
+# Editor / SO
+.vscode/
+.idea/
+.DS_Store
+
+# Log de instabilidade do MuJoCo
+MUJOCO_LOG.TXT

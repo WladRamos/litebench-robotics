@@ -1,0 +1,24 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        # Linux e Windows: o projeto é usado nos dois.
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.12"
+      # Só o núcleo leve: sem MuJoCo/LeRobot, sem GPU. Testes que precisam deles usam importorskip.
+      # bridge (pyzmq, msgpack): leve, testa a ponte no protocolo do GR00T.
+      - run: uv pip install --system -e ".[dev,usd,bridge]"
+      - run: ruff check .
+      - run: pytest -q

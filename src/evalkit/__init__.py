@@ -11,4 +11,4 @@
     groot_bridge — protocolo do servidor GR00T: serve políticas LeRobot ao avaliador do workshop no Isaac
 """
 
-__version__ = "0.0.1"
+__version__ = "0.1.0"

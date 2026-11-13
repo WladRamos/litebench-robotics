@@ -10,4 +10,4 @@ Módulos:
     lerobot_env    — plugin do ``lerobot-eval`` e ``make_env`` do EnvHub (precisa do extra lerobot)
 """
 
-__version__ = "0.0.1"
+__version__ = "0.1.0"

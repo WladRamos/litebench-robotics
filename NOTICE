@@ -1,0 +1,19 @@
+litebench-robotics
+Copyright 2026 Wladimir Ramos
+
+Este projeto reimplementa, para o MuJoCo, a tarefa "Vials-to-Rack" do
+Sim-to-Real SO-101 Workshop da NVIDIA
+(https://github.com/isaac-sim/Sim-to-Real-SO-101-Workshop), licenciado sob Apache-2.0.
+Constantes da tarefa e o critério de sucesso (src/vials_lite/spec.py, success.py,
+joint_mapping.py) são derivados de mdp/terms.py, mdp/resets.py, tasks/*.py e
+utils/lerobot_interface.py daquele repositório.
+
+Malhas visuais do rack e do frasco (assets/vials_lite/*.obj) derivadas de
+source/sim_to_real_so101/assets/usd/Vial_rack_simple.usda e Vial_opaque.usda daquele
+repositório (commit ce807d9), Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES,
+Apache-2.0; convertidas para OBJ por scripts/export_workshop_meshes.py, sem outra alteração.
+
+Modelo do robô: MuJoCo Menagerie robotstudio_so101 (Apache-2.0), derivado de
+TheRobotStudio/SO-ARM100 (Apache-2.0).
+
+Texturas HDRI do workshop: Poly Haven (CC0).

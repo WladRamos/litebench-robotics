@@ -1,0 +1,50 @@
+[project]
+name = "litebench-robotics"
+version = "0.1.0"
+description = "A tarefa Vials-to-Rack do workshop Sim-to-Real SO-101 da NVIDIA em MuJoCo, com avaliação diagnóstica de políticas (evalkit)."
+readme = "README.md"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Wladimir Ramos" }]
+requires-python = ">=3.12"   # o LeRobot 0.6.x exige 3.12+
+dependencies = [
+    "numpy>=1.26",
+]
+
+[project.optional-dependencies]
+sim = [
+    "mujoco>=3.3",          # validado com 3.14.0; a versão exata fica no uv.lock
+    "gymnasium>=1.0",
+]
+lerobot = [
+    "lerobot[dataset,pi,training]==0.6.1",  # mesma versão no treino e na avaliação; [dataset]: o lerobot-eval exige;
+    # [pi]: pi0.5; [training]: o lerobot-train (accelerate, wandb)
+]
+bridge = [
+    "pyzmq>=26",            # servidor de política no protocolo do GR00T, para o lerobot_eval.py do workshop
+    "msgpack>=1.0",
+]
+usd = [
+    "usd-core>=24.0",       # só para extrair dados dos assets do workshop
+]
+dev = [
+    "pytest>=8",
+    "ruff>=0.6",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/vials_lite", "src/evalkit"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]

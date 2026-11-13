@@ -1,0 +1,12 @@
+# Finais de linha: LF no repositório, em qualquer sistema (o projeto é usado no Linux e no Windows).
+* text=auto eol=lf
+*.bat text eol=crlf
+*.ps1 text eol=crlf
+
+# Binários
+*.png binary
+*.jpg binary
+*.stl binary
+*.obj binary
+*.mp4 binary
+*.zip binary
