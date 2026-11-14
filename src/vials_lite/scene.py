@@ -13,7 +13,8 @@ no MuJoCo uma malha vira o seu fecho convexo, e os furos do rack sumiriam):
   ``angular_damping`` do workshop;
 * rack: placa de fundo + por furo, anéis de 16 caixas: assento cônico (de r 5 mm em z_local −0,002
   a r 15 mm em 0,014, onde a ponta do frasco encaixa), parede reta (raio 17 mm, até 0,051) e
-  chanfro (até raio 23 mm em 0,073) + tampo plano e cantos, medidos na malha do USD, 200 g;
+  chanfro (até raio 23 mm em 0,073) + tampo plano e cantos, medidos na malha do USD, com a massa que o
+  Isaac simula (``RACK_MASS_MODE``);
 * aparência do rack e do frasco: malhas só visuais (sem contato e sem massa) derivadas dos USD
   (``assets/vials_lite/``, ``scripts/export_workshop_meshes.py``); a colisão fica no grupo
   ``HIDDEN_GROUP``, que o ``Renderer`` não desenha. Cores dos USD convertidas de linear para sRGB
