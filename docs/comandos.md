@@ -17,7 +17,7 @@ uv run python scripts/watch_policy.py --policy arjunjuneja/act_vials_50k
 uv run python scripts/watch_policy.py --policy arjunjuneja/act_vials_50k --variant dr-eval --speed 0.5 --seed 1000
 ```
 
-O terminal mostra, por episódio, a semente, o resultado, a fase máxima e a categoria de falha. No viewer, `[` e `]` trocam entre a câmera externa e a do punho, Esc solta a câmera (arrastar gira, botão direito desloca, roda aproxima) e a barra de espaço pausa.
+O terminal mostra, por episódio, a semente, o resultado, a fase máxima e a categoria de falha. O viewer abre na câmera externa, a que a política vê; `--camera ego` ou `--camera free` abrem em outra. Durante a execução, a lista **Camera** do painel esquerdo (seção Rendering) tem todas as câmeras do ambiente, e `[` e `]` percorrem a mesma lista. Esc solta a câmera (arrastar gira, botão direito desloca, roda aproxima) e a barra de espaço pausa.
 
 Num notebook com GPU híbrida no Linux, o viewer pode abrir na integrada: veja [instalacao.md](instalacao.md#4-gpu-e-render).
 

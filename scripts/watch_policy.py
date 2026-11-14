@@ -10,9 +10,10 @@ Não grava nada: é para ver. Para medir, use o runner.
 ``--policy scripted`` usa a demo roteirizada (``vials_lite.scripted``), sem LeRobot nem política
 treinada. Sem ``--seed``, a primeira semente é sorteada.
 
-O viewer abre na câmera externa (a que a política vê). No viewer: ``[`` e ``]`` trocam de câmera
-(``ego`` é a do punho), Esc passa para a câmera livre (arrastar gira, botão direito desloca, roda
-aproxima) e a barra de espaço pausa. Fechar a janela ou Ctrl+C encerra.
+O viewer abre na câmera externa (a que a política vê; ``--camera ego`` ou ``--camera free`` abrem em
+outra). Todas as câmeras do ambiente estão na lista Camera do painel esquerdo (seção Rendering), e
+``[`` e ``]`` percorrem a mesma lista; Esc passa para a câmera livre (arrastar gira, botão direito
+desloca, roda aproxima) e a barra de espaço pausa. Fechar a janela ou Ctrl+C encerra.
 
 Precisa de monitor: o viewer não roda com ``MUJOCO_GL=egl`` (por SSH, use o ``--video`` do runner).
 
