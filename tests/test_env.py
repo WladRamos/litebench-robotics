@@ -315,6 +315,7 @@ def test_dr_components_are_validated():
         VialsLiteEnv(render_images=False, variant="dr-eval", dr_components=("hdri",))
 
 
+@needs_menagerie
 def test_lighting_is_randomized_within_workshop_ranges():
     ev, dr = VialsLiteEnv(render_images=False), VialsLiteEnv(render_images=False, variant="dr-eval")
     try:
@@ -335,6 +336,7 @@ def test_lighting_is_randomized_within_workshop_ranges():
         dr.close()
 
 
+@needs_menagerie
 def test_brighter_lightbox_renders_brighter_image():
     import mujoco
 
@@ -355,6 +357,7 @@ def test_brighter_lightbox_renders_brighter_image():
         env.close()
 
 
+@needs_menagerie
 def test_visual_meshes_have_no_contact_or_mass_and_collision_is_hidden():
     import mujoco
 
@@ -482,6 +485,7 @@ def test_rack_flat_top_around_the_chamfer(monkeypatch):
     assert min(ramp) < scene.RACK_TOP - 8e-4
 
 
+@needs_menagerie
 def test_rack_mesh_carries_baked_ambient_occlusion():
     from vials_lite.scene import AO_FLOOR, AO_MATERIAL, AO_RAMP_TEXELS, _ao_ramp, ao_to_u
 
@@ -501,6 +505,7 @@ def test_rack_mesh_carries_baked_ambient_occlusion():
     assert 0 < texel[0] and texel[1] < AO_RAMP_TEXELS - 1
 
 
+@needs_menagerie
 def test_vial_cap_carries_knurl_texture():
     from vials_lite.scene import (
         KNURL_GROOVE,
@@ -526,6 +531,7 @@ def test_vial_cap_carries_knurl_texture():
     assert tex[dark].max() == round(255 * KNURL_GROOVE_SHADE)
 
 
+@needs_menagerie
 def test_contacts_use_isaac_default_friction(env):
     from vials_lite.scene import GRIPPER_TORSION, ISAAC_FRICTION
 
@@ -538,6 +544,7 @@ def test_contacts_use_isaac_default_friction(env):
     assert np.all(m.geom_friction[jaw, 2] == 0)
 
 
+@needs_menagerie
 def test_vial_placed_at_reset_seats_upright_in_the_conical_bore():
     from vials_lite import scene
 
@@ -578,6 +585,7 @@ def test_unknown_variant_rejected():
         VialsLiteEnv(external_cam="foo", render_images=False)
 
 
+@needs_menagerie
 def test_dataset_init_pose_and_fixed_camera_keep_the_draw():
     """Pose dos operadores e câmera externa fixa: o resto da cena é o mesmo sorteio da semente."""
     ws = VialsLiteEnv(render_images=False)
@@ -606,6 +614,7 @@ def test_dataset_init_pose_and_fixed_camera_keep_the_draw():
         ds.close()
 
 
+@needs_menagerie
 @pytest.mark.parametrize("variant", ["eval", "dr-eval"])
 def test_dataset_layout_is_the_workshop_draw_shifted(variant):
     """Mesma semente: o sorteio é o mesmo, com rack, frascos, tapete e lightbox deslocados."""
@@ -635,6 +644,7 @@ def test_dataset_layout_is_the_workshop_draw_shifted(variant):
         ds.close()
 
 
+@needs_menagerie
 def test_reset_with_fixed_scene_overrides_and_next_reset_restores(env):
     m, ids = env.model, env.ids
     default_fovy = float(m.cam_fovy[ids.external_cam])

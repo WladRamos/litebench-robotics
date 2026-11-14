@@ -9,11 +9,12 @@ Cada tarefa abaixo traz o objetivo, os passos e as exceções: o que pode dar er
 1. Instale o [uv](https://docs.astral.sh/uv/) e clone o repositório.
 2. `uv sync --locked --extra dev --extra sim` (acrescente `--extra lerobot` para avaliar políticas).
 3. Clone o MuJoCo Menagerie em `assets/third_party/mujoco_menagerie`.
-4. `uv run pytest -q`: todos verdes, sem testes de cena pulados.
+4. `MUJOCO_GL=egl uv run pytest -q`: todos verdes, sem testes de cena pulados.
 5. `MUJOCO_GL=egl uv run python scripts/bench_render.py --menagerie assets/third_party/mujoco_menagerie`: confira que o `GL_RENDERER` é NVIDIA e anote os steps por segundo.
 
 **Exceções:**
 - Testes de cena pulados com "MuJoCo Menagerie ausente": o passo 3 não foi feito, ou o clone está em outro lugar (defina `VIALS_LITE_MENAGERIE`).
+- No Linux sem monitor, um teste de render falha com `an OpenGL platform library has not been loaded`: faltou o `MUJOCO_GL=egl`.
 - `GL_RENDERER` com Intel, Mesa ou llvmpipe: o render está fora da NVIDIA. Veja a GPU híbrida em [instalacao.md](instalacao.md#4-gpu-e-render).
 - `uv sync --locked` recusa instalar: o `uv.lock` não corresponde ao `pyproject.toml`. Não use `uv lock` para "consertar" sem saber por quê, porque as versões mudam.
 

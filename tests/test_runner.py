@@ -11,6 +11,12 @@ pytest.importorskip("gymnasium")
 from evalkit.runner import INITIAL_ACTION, policy_seed, rescore, run  # noqa: E402
 from vials_lite import spec  # noqa: E402
 from vials_lite.env import VialsLiteEnv  # noqa: E402
+from vials_lite.scene import default_menagerie_dir  # noqa: E402
+
+pytestmark = pytest.mark.skipif(
+    not (default_menagerie_dir() / "robotstudio_so101" / "so101.xml").is_file(),
+    reason="MuJoCo Menagerie ausente (ver assets/README.md)",
+)
 
 
 class HoldPolicy:

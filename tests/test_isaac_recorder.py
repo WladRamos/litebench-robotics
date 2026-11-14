@@ -7,6 +7,7 @@ from pathlib import Path
 from types import SimpleNamespace
 
 import numpy as np
+import pytest
 
 
 def _load_script():
@@ -108,7 +109,7 @@ class FakeCameraEnv(FakeIsaacEnv):
 
 
 def test_recorder_writes_videos_of_first_episodes(tmp_path):
-    import av
+    av = pytest.importorskip("av")
 
     env = FakeCameraEnv()
     r = rec.Recorder(env, tmp_path, stage_fn=FakeStage, state_fn=_state, cameras_fn=lambda e: {}, frames=1)

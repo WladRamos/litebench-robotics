@@ -111,7 +111,7 @@ São 75 episódios: parquets de juntas e ações (~1,6 MB) e vídeos AV1 das dua
 ## 6. Verificar a instalação
 
 ```bash
-uv run pytest -q          # todos verdes; pulados só os que dependem de algo não instalado
+MUJOCO_GL=egl uv run pytest -q   # todos verdes; pulados só os que dependem de algo não instalado
 uv run ruff check .
 ```
 

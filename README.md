@@ -41,7 +41,7 @@ uv sync --locked --extra dev --extra sim
 uv run pytest -q          # sem o Menagerie, os testes de cena são pulados
 
 git clone --depth 1 https://github.com/google-deepmind/mujoco_menagerie.git assets/third_party/mujoco_menagerie
-uv run pytest -q          # agora com a cena
+MUJOCO_GL=egl uv run pytest -q   # agora com a cena; o egl dispensa monitor (SSH, servidor)
 MUJOCO_GL=egl uv run python scripts/bench_render.py --menagerie assets/third_party/mujoco_menagerie
 ```
 

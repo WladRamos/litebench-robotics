@@ -228,8 +228,9 @@ class LightingCalibration:
     """
 
     # Ajuste de scripts/fit_lighting.py com as cores medidas nas cenas reconstruídas (máscaras com
-    # o tapete na pose de cada episódio, para não misturar tapete e piso): piso p5/50/95 = 131/174/213 (vídeo 130/175/211), parede do fundo 163/205/251
-    # (157/215/234), R/B do piso 1,00/1,05/1,26 (0,98/1,06/1,26); piso na eval 173 (premissa).
+    # o tapete na pose de cada episódio, para não misturar tapete e piso): piso p5/50/95 =
+    # 131/174/213 (vídeo 130/175/211), parede do fundo 163/205/251 (157/215/234), R/B do piso
+    # 1,00/1,05/1,26 (0,98/1,06/1,26); piso na eval 173 (premissa).
     rect_diffuse: float = 0.3176  # soma das luzes da fita
     rect_ambient: float = 0.4763
     dome_diffuse: float = 0.4323
