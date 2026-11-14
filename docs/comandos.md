@@ -2,7 +2,7 @@
 
 Os comandos do dia a dia, para copiar. Eles supõem a instalação completa ([instalacao.md](instalacao.md)), com o Menagerie em `assets/third_party/mujoco_menagerie` e os extras `dev`, `sim` e `lerobot`, e partem da raiz do repositório. Os passos e as exceções de cada tarefa estão no [manual](manual.md).
 
-No Linux sem monitor (SSH, servidor), prefixe com `MUJOCO_GL=egl` tudo o que renderiza, menos o viewer, que precisa de monitor. No PowerShell, troque as quebras `\` por crases.
+No Linux sem monitor (SSH, servidor), prefixe com `MUJOCO_GL=egl` tudo o que renderiza, menos o viewer, que precisa de monitor (para ver de longe, use o `--stream`, abaixo). No PowerShell, troque as quebras `\` por crases.
 
 ## Ver
 
@@ -20,6 +20,18 @@ uv run python scripts/watch_policy.py --policy arjunjuneja/act_vials_50k --varia
 O terminal mostra, por episódio, a semente, o resultado, a fase máxima e a categoria de falha. O viewer abre na câmera externa, a que a política vê; `--camera ego` ou `--camera free` abrem em outra. Durante a execução, a lista **Camera** do painel esquerdo (seção Rendering) tem todas as câmeras do ambiente, e `[` e `]` percorrem a mesma lista. Esc solta a câmera (arrastar gira, botão direito desloca, roda aproxima) e a barra de espaço pausa.
 
 Num notebook com GPU híbrida no Linux, o viewer pode abrir na integrada: veja [instalacao.md](instalacao.md#4-gpu-e-render).
+
+**De outra máquina** (a política roda num computador remoto, e VNC ou `ssh -X` deixam o viewer travado): a máquina remota renderiza sem janela e serve as imagens, que você abre no navegador por um túnel SSH.
+
+```bash
+# na máquina remota (por SSH)
+uv run python scripts/watch_policy.py --policy arjunjuneja/act_vials_50k --stream 8000
+
+# na sua máquina: abra o túnel e acesse http://localhost:8000
+ssh -N -L 8000:localhost:8000 usuario@maquina-remota
+```
+
+A página escolhe a câmera (as do ambiente ou uma livre, que gira arrastando e aproxima com a roda), pausa e lista o resultado de cada episódio. O servidor só aceita conexões da própria máquina; por isso o túnel. Ctrl+C no terminal remoto encerra. Com `--policy scripted` sem o extra `lerobot`, rode com `uv run --with pillow`.
 
 `--policy` aceita uma pasta local com o checkpoint, um repositório do Hub ou `groot://host:porta` (com `--action-horizon`), como no runner.
 

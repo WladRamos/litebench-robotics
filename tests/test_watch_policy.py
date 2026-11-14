@@ -1,9 +1,11 @@
-"""``scripts/watch_policy.py`` sem janela: a demo roteirizada como política e o ritmo do viewer."""
+"""``scripts/watch_policy.py`` sem janela: a demo roteirizada como política, o ritmo do viewer e o modo
+navegador (``--stream``)."""
 
 import importlib.util
 import sys
 from pathlib import Path
 
+import numpy as np
 import pytest
 
 pytest.importorskip("mujoco")
@@ -61,3 +63,30 @@ def test_scripted_policy_runs_an_episode_through_the_runner():
     env.close()
     assert ep["success"]
     assert viewer.syncs == ep["steps"]  # uma sincronização por step
+
+
+@pytest.mark.skipif(
+    not (default_menagerie_dir() / "robotstudio_so101" / "so101.xml").is_file(),
+    reason="MuJoCo Menagerie ausente (ver assets/README.md)",
+)
+def test_stream_sink_renders_the_camera_chosen_by_the_page():
+    mod = _load_script()
+    env = mod.VialsLiteEnv(variant="eval", render_images=False)
+    env.reset(seed=1)
+    sink = mod.StreamSink(env, speed=1e6, camera="external_D455")
+    try:
+        assert sink.cameras[-1] == mod.FREE_CAMERA and "ego" in sink.cameras
+        sink.append(None)
+        assert sink.frame is None  # renderiza um step sim, um não
+        sink.append(None)
+        external = sink.frame.copy()
+        sink.control({"camera": [mod.FREE_CAMERA], "orbit": ["10,5"], "zoom": ["1"]})
+        sink.append(None)
+        sink.append(None)
+        assert sink.status()["camera"] == mod.FREE_CAMERA
+        assert sink.frame.shape == (480, 640, 3) and not np.array_equal(sink.frame, external)
+        sink.control({"camera": ["não existe"]})
+        assert sink.camera == mod.FREE_CAMERA
+    finally:
+        sink.close()
+        env.close()

@@ -44,7 +44,7 @@ Detalhes em [instalacao.md](instalacao.md).
 
 **Exceções:**
 - `FileNotFoundError: MJCF do Menagerie não encontrado`: tarefa A, passo 3.
-- O `watch_policy.py` recusa rodar com `MUJOCO_GL=egl`: o viewer abre uma janela e precisa de monitor. Por SSH, grave vídeo com o runner (`--video N`).
+- O `watch_policy.py` recusa rodar com `MUJOCO_GL=egl`: o viewer abre uma janela e precisa de monitor. Por SSH, use `--stream PORTA` e abra no navegador por um túnel ([comandos.md](comandos.md#ver)).
 - No Linux sem monitor, erro ao criar o contexto OpenGL: defina `MUJOCO_GL=egl` antes de abrir o Python.
 - `render_images=False` no construtor dispensa o render e acelera, quando só a física interessa.
 

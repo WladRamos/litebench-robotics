@@ -65,7 +65,7 @@ MUJOCO_GL=egl uv run python -m evalkit.runner --policy arjunjuneja/act_vials_50k
     --variant eval --episodes 20 --out outputs/evalkit/act_eval
 ```
 
-Para **ver** a política jogando, em cenas sorteadas uma atrás da outra até fechar a janela (precisa de monitor): `uv run python scripts/watch_policy.py --policy arjunjuneja/act_vials_50k`. Com `--policy scripted`, roda a demo roteirizada, sem política e sem o extra `lerobot`.
+Para **ver** a política jogando, em cenas sorteadas uma atrás da outra até fechar a janela (precisa de monitor): `uv run python scripts/watch_policy.py --policy arjunjuneja/act_vials_50k`. Com `--policy scripted`, roda a demo roteirizada, sem política e sem o extra `lerobot`. Numa máquina remota, `--stream 8000` serve as imagens para o navegador, por túnel SSH ([docs/comandos.md](docs/comandos.md#ver)).
 
 A saída do runner fica em `outputs/evalkit/act_eval/`: `report.md` com a taxa e o IC, o funil por fase, as falhas e os fechamentos da garra, e os dados brutos (`run.json`, `episodes.jsonl`, `steps/*.npz`). No PowerShell, tire o `MUJOCO_GL=egl` e troque as quebras `\` por crases.
 
