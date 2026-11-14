@@ -8,6 +8,7 @@ Os scripts de calibração ficam nesta pasta, junto com os outros, porque há im
 
 | Script | O que faz |
 |---|---|
+| `watch_policy.py` | assiste a uma política (ou à demo roteirizada) no viewer do MuJoCo, em episódios consecutivos até fechar a janela |
 | `bench_render.py` | mede quantos steps por segundo a máquina faz, com e sem as duas câmeras, e mostra qual GPU está renderizando |
 | `success_seating.py` | classifica os sucessos de um run: encaixado, no furo, sobre o tampo ou só o frasco pré-colocado |
 

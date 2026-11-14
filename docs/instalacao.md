@@ -62,7 +62,7 @@ O script imprime o `GL_RENDERER`. Se aparecer Intel, AMD, Mesa ou llvmpipe em ve
 
 **Notebook com GPU híbrida (Intel + NVIDIA):**
 
-- **Linux:** primeiro confira se o driver NVIDIA está carregado (`nvidia-smi`; depois de atualizar o kernel, reinicie). Com o driver carregado, o EGL costuma escolher a NVIDIA sozinho. Se não escolher, tente `MUJOCO_EGL_DEVICE_ID=<n>` ou `__EGL_VENDOR_LIBRARY_FILENAMES=/usr/share/glvnd/egl_vendor.d/10_nvidia.json`.
+- **Linux:** primeiro confira se o driver NVIDIA está carregado (`nvidia-smi`; depois de atualizar o kernel, reinicie). Com o driver carregado, o EGL costuma escolher a NVIDIA sozinho. Se não escolher, tente `MUJOCO_EGL_DEVICE_ID=<n>` ou `__EGL_VENDOR_LIBRARY_FILENAMES=/usr/share/glvnd/egl_vendor.d/10_nvidia.json`. O viewer do `scripts/watch_policy.py` abre uma janela por GLX, não por EGL; para ele, use `__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia` antes do comando (o script imprime a GPU ao começar).
 - **Windows:** em "Configurações de gráficos", marque como "Alto desempenho" o `python.exe` do `.venv` **e** o interpretador base do uv (`%APPDATA%\uv\python\cpython-3.12...\python.exe`): o do `.venv` é só um lançador, e quem abre o contexto OpenGL é o base. A docstring de `scripts/bench_render.py` tem os detalhes.
 
 **PyTorch e CUDA** (extra `lerobot`):

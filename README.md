@@ -65,13 +65,16 @@ MUJOCO_GL=egl uv run python -m evalkit.runner --policy arjunjuneja/act_vials_50k
     --variant eval --episodes 20 --out outputs/evalkit/act_eval
 ```
 
-A saída fica em `outputs/evalkit/act_eval/`: `report.md` com a taxa e o IC, o funil por fase, as falhas e os fechamentos da garra, e os dados brutos (`run.json`, `episodes.jsonl`, `steps/*.npz`). No PowerShell, tire o `MUJOCO_GL=egl` e troque as quebras `\` por crases.
+Para **ver** a política jogando, em cenas sorteadas uma atrás da outra até fechar a janela (precisa de monitor): `uv run python scripts/watch_policy.py --policy arjunjuneja/act_vials_50k`. Com `--policy scripted`, roda a demo roteirizada, sem política e sem o extra `lerobot`.
+
+A saída do runner fica em `outputs/evalkit/act_eval/`: `report.md` com a taxa e o IC, o funil por fase, as falhas e os fechamentos da garra, e os dados brutos (`run.json`, `episodes.jsonl`, `steps/*.npz`). No PowerShell, tire o `MUJOCO_GL=egl` e troque as quebras `\` por crases.
 
 ## Documentação
 
 | | |
 |---|---|
 | [Instalação](docs/instalacao.md) | extras, GPU, assets de terceiros, dataset do curso, problemas comuns |
+| [Comandos úteis](docs/comandos.md) | os comandos do dia a dia para copiar: ver, avaliar, analisar, verificar |
 | [Manual de uso](docs/manual.md) | as tarefas passo a passo: instalar, rodar a cena, avaliar, comparar, validar contra o Isaac |
 | [Arquitetura](docs/arquitetura.md) | módulos, interfaces, fluxo de uma avaliação, formatos de saída |
 | [Especificação da tarefa](docs/especificacao-tarefa.md) | a cena do workshop, número por número, e as aproximações do MuJoCo |

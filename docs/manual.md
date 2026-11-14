@@ -1,6 +1,6 @@
 # Manual de uso
 
-Cada tarefa abaixo traz o objetivo, os passos e as exceções: o que pode dar errado e o que fazer. Os comandos são para bash. No PowerShell, tire o `MUJOCO_GL=egl` e troque as quebras de linha `\` por crases.
+Cada tarefa abaixo traz o objetivo, os passos e as exceções: o que pode dar errado e o que fazer. Os comandos são para bash. No PowerShell, tire o `MUJOCO_GL=egl` e troque as quebras de linha `\` por crases. Os comandos mais usados, prontos para copiar, estão em [comandos.md](comandos.md).
 
 ## A. Instalar e verificar
 
@@ -39,10 +39,12 @@ Detalhes em [instalacao.md](instalacao.md).
    ```
 
 2. A demo agarra um frasco, põe em pé sobre um furo livre, solta e recua. Ela deve terminar com sucesso, com os eventos `GRASP`, `RELEASE` e `RACK:<frasco>`.
-3. Para salvar imagens, grave `obs["pixels"]["external_D455"]` com qualquer biblioteca de imagem. Para vídeo de um episódio inteiro, use o runner com `--video N` (tarefa C).
+3. Para assistir no viewer do MuJoCo, episódio após episódio: `uv run python scripts/watch_policy.py --policy scripted` (precisa de monitor). O mesmo comando, com uma política no `--policy`, mostra a política jogando ([comandos.md](comandos.md#ver)).
+4. Para salvar imagens, grave `obs["pixels"]["external_D455"]` com qualquer biblioteca de imagem. Para vídeo de um episódio inteiro, use o runner com `--video N` (tarefa C).
 
 **Exceções:**
 - `FileNotFoundError: MJCF do Menagerie não encontrado`: tarefa A, passo 3.
+- O `watch_policy.py` recusa rodar com `MUJOCO_GL=egl`: o viewer abre uma janela e precisa de monitor. Por SSH, grave vídeo com o runner (`--video N`).
 - No Linux sem monitor, erro ao criar o contexto OpenGL: defina `MUJOCO_GL=egl` antes de abrir o Python.
 - `render_images=False` no construtor dispensa o render e acelera, quando só a física interessa.
 
@@ -59,7 +61,8 @@ Detalhes em [instalacao.md](instalacao.md).
    ```
 
 3. Abra `outputs/evalkit/act_eval/report.md`: taxa e IC 95%, funil por fase (alcançou o frasco, agarrou, levantou, sobre o rack, soltou no rack, em pé, sucesso), categorias de falha, fechamentos da garra e uma tabela por episódio. Os vídeos ficam em `videos/`.
-4. Para outras condições, troque `--variant dr-eval`, ou use `--layout dataset`, `--init-pose dataset`, `--external-cam fixed` ([arquitetura.md](arquitetura.md#opções-do-runner)).
+4. Para ver a política antes ou depois de medir: `uv run python scripts/watch_policy.py --policy arjunjuneja/act_vials_50k`. A semente de cada episódio aparece no terminal, e `--seed <semente> --episodes 1 --video 1` no runner repete aquele episódio com relatório.
+5. Para outras condições, troque `--variant dr-eval`, ou use `--layout dataset`, `--init-pose dataset`, `--external-cam fixed` ([arquitetura.md](arquitetura.md#opções-do-runner)).
 
 **Alternativa pelo `lerobot-eval`** (o formato de avaliação do próprio LeRobot):
 
